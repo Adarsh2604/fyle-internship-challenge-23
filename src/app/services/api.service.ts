@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, throwError } from 'rxjs';
 
@@ -11,8 +11,14 @@ export class ApiService {
     private httpClient: HttpClient
   ) { }
 
-  getUser(githubUsername: string) {
-    return this.httpClient.get(`https://api.github.com/users/${githubUsername}`);
+  getUser(githubUsername: string, page: number = 1, perPage: number = 10) {
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('per_page', perPage.toString());
+    return this.httpClient.get(`https://api.github.com/users/${githubUsername}/repos`,{ params });
+  }
+  getAllRepos(githubUsername: string) {
+    return this.httpClient.get(`https://api.github.com/users/${githubUsername}/repos`);
   }
 
   // implement getRepos method by referring to the documentation. Add proper types for the return type and params 
