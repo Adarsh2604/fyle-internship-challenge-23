@@ -15,7 +15,7 @@ declare var Array: any;
       />
       <button class="bg-blue-500 text-white p-2 ml-2" (click)="getRepositories()">Get Repos</button> -->
 
-      <!-- <div *ngIf="repositories.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- <div *ngIf="repositories?.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div *ngFor="let repo of repositories" class="bg-white p-4 shadow rounded">
           <h3 class="text-lg font-semibold">{{ repo.name }}</h3>
           <p class="mt-2 text-gray-600">{{ repo.description }}</p>
@@ -55,7 +55,7 @@ declare var Array: any;
     </div>
       <ng-template #content>
         <!-- Actual repositories content -->
-        <div *ngIf="repositories.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div *ngIf="repositories?.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div *ngFor="let repo of repositories" class="bg-white p-4 shadow rounded">
             <h3 class="text-lg font-semibold">{{ repo.name }}</h3>
             <p class="mt-2 text-gray-600">{{ repo.description }}</p>
@@ -150,7 +150,7 @@ export class GithubComponent implements OnInit {
   }
   changePage(page: number) {
     console.log("Current page:-",page)
-    if (page >= 1 && page <= this.pageNumbers.length) {
+    if (page >= 1 && page <= this.pageNumbers?.length) {
       this.currentPage = page;
       this.getRepositories();
     }
@@ -162,7 +162,7 @@ export class GithubComponent implements OnInit {
   }
 
   goToSpecificPage() {
-    if (this.goToPage && this.goToPage >= 1 && this.goToPage <= this.pageNumbers.length) {
+    if (this.goToPage && this.goToPage >= 1 && this.goToPage <= this.pageNumbers?.length) {
       this.currentPage = this.goToPage;
       this.getRepositories();
     }
@@ -206,7 +206,7 @@ export class GithubComponent implements OnInit {
 
   private calculatePageNumbers() {
     // Calculate total pages based on the number of repositories and repositories per page
-    const totalPages = Math.ceil(this.AllRepositories.length / this.selectedPerPage);
+    const totalPages = Math.ceil(this.AllRepositories?.length / this.selectedPerPage);
     this.pageNumbers = Array.from({ length: totalPages }, (_:any, i:number) => i + 1);
   }
 }
